@@ -16,8 +16,8 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - { r: "release", pkg: "PureCN"   } # Bioconductor
-          - { r: "release", pkg: "cfdnakit" } # Bioconductor
+          - { r: "release", pkg: "PureCN"  , bioc: true }
+          - { r: "release", pkg: "cfdnakit", bioc: true }
           - { r: "release", pkg: "jointseg" }
           - { r: "release", pkg: "EstMix"   }
 
@@ -57,8 +57,12 @@ jobs:
         run: |
           remotes::install_deps(dependencies = TRUE)
           install.packages(".", repos=NULL, type="source")
-          install.packages("BiocManager")
-          BiocManager::install("${{ matrix.config.pkg }}", dependencies=TRUE)
+          if (identical("${{ matrix.config.bioc }}", "true")) {
+            install.packages("BiocManager")
+            BiocManager::install("${{ matrix.config.pkg }}", dependencies=TRUE)
+          } else {
+            install.packages("${{ matrix.config.pkg }}", dependencies=TRUE)
+          }
         shell: Rscript {0}
 
       - name: Session info
@@ -70,7 +74,11 @@ jobs:
 
       - name: Check reverse dependency package
         run: |
-          url=$(Rscript -e "cat(remotes:::download_version_url('${{ matrix.config.pkg }}', version=NULL, repos='https://cloud.r-project.org', type='source'))")
+          if (identical("${{ matrix.config.bioc }}", "true")) {
+            url=$(Rscript -e "cat(remotes:::download_version_url('${{ matrix.config.pkg }}', version=NULL, repos=sprintf('https://bioconductor.org/packages/%s/bioc', utils:::.BioC_version_associated_with_R_version_default), type='source'))")
+          } else {
+            url=$(Rscript -e "cat(remotes:::download_version_url('${{ matrix.config.pkg }}', version=NULL, repos='https://cloud.r-project.org', type='source'))")
+          }
           wget "$url"
           R CMD check --no-manual --as-cran "$(basename "$url")"
 
