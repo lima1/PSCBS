@@ -11,7 +11,8 @@
 # @synopsis
 #
 # \arguments{
-#   \item{fit}{A @see "DNAcopy" object (of the \pkg{DNAcopy} package.)}
+#   \item{fit}{A \code{\link[DNAcopy:DNAcopy]{DNAcopy}}. object
+#     (of the \pkg{DNAcopy} package.)}
 #   \item{sample}{An index specifying which sample to extract,
 #     if more than one exists.}
 #   \item{...}{Not used.}
@@ -25,7 +26,7 @@
 #
 # \seealso{
 #   \code{\link[PSCBS:as.DNAcopy.CBS]{as.DNAcopy()}}.
-#   @seeclass
+#   For more information see \code{\link[DNAcopy:DNAcopy]{DNAcopy}}.
 # }
 #
 # @keyword internal

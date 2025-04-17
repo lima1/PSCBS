@@ -16,7 +16,8 @@
 # }
 #
 # \value{
-#   Returns a @see "DNAcopy" object (of the \pkg{DNAcopy} package).
+#   Returns a \code{\link[DNAcopy:DNAcopy]{DNAcopy}} object
+#   (of the \pkg{DNAcopy} package).
 # }
 #
 # \examples{
