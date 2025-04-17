@@ -1,6 +1,8 @@
 # Version (development version)
 
- * ...
+## Documentation
+
+ * Fix minor help-page issues.
 
 
 # Version 0.67.0 [2024-02-16]
