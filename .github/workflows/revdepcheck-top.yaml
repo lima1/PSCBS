@@ -74,11 +74,11 @@ jobs:
 
       - name: Check reverse dependency package
         run: |
-          if (identical("${{ matrix.config.bioc }}", "true")) {
+          if [[ "${{ matrix.config.bioc }}" == "true" ]]; then
             url=$(Rscript -e "cat(remotes:::download_version_url('${{ matrix.config.pkg }}', version=NULL, repos=sprintf('https://bioconductor.org/packages/%s/bioc', utils:::.BioC_version_associated_with_R_version_default), type='source'))")
-          } else {
+          else
             url=$(Rscript -e "cat(remotes:::download_version_url('${{ matrix.config.pkg }}', version=NULL, repos='https://cloud.r-project.org', type='source'))")
-          }
+          fi
           wget "$url"
           R CMD check --no-manual --as-cran "$(basename "$url")"
 
