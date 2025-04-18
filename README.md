@@ -1,7 +1,7 @@
 
 
 <div id="badges"><!-- pkgdown markup -->
-<a href="https://CRAN.R-project.org/web/checks/check_results_PSCBS.html"><img border="0" src="https://www.r-pkg.org/badges/version/PSCBS" alt="CRAN check status"/></a> <a href="https://github.com/HenrikBengtsson/PSCBS/actions?query=workflow%3AR-CMD-check"><img border="0" src="https://github.com/HenrikBengtsson/PSCBS/actions/workflows/R-CMD-check.yaml/badge.svg?branch=develop" alt="R CMD check status"/></a>     <a href="https://app.codecov.io/gh/HenrikBengtsson/PSCBS"><img border="0" src="https://codecov.io/gh/HenrikBengtsson/PSCBS/branch/develop/graph/badge.svg" alt="Coverage Status"/></a> 
+<a href="https://CRAN.R-project.org/web/checks/check_results_PSCBS.html"><img border="0" src="https://www.r-pkg.org/badges/version/PSCBS" alt="CRAN check status"/></a> <a href="https://github.com/HenrikBengtsson/PSCBS/actions?query=workflow%3AR-CMD-check"><img border="0" src="https://github.com/HenrikBengtsson/PSCBS/actions/workflows/R-CMD-check.yaml/badge.svg?branch=develop" alt="R CMD check status"/></a> <a href="https://github.com/HenrikBengtsson/PSCBS/actions?query=workflow%3Arevdepcheck-top"><img border="0" src="https://github.com/HenrikBengtsson/PSCBS/actions/workflows/revdepcheck-top.yaml/badge.svg?branch=develop" alt="Top reverse-dependency checks status"/></a>     
 </div>
 
 # PSCBS: Analysis of Parent-Specific DNA Copy Numbers 
@@ -95,9 +95,10 @@ future vignette '[A Future for R: Controlling Default Future Strategy](https://C
 
 ## References
 
-* Bengtsson H, Neuvial P, Speed TP. TumorBoost: Normalization of allele-specific tumor copy numbers from a single pair of tumor-normal genotyping microarrays, BMC Bioinformatics, 2010. DOI: [10.1186/1471-2105-11-245](https://doi.org/10.1186%2F1471-2105-11-245). PMID: [20462408](https://europepmc.org/article/MED/20462408), PMCID: [PMC2894037](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2894037/)
+* Bengtsson H, Neuvial P, Speed TP. TumorBoost: Normalization of allele-specific tumor copy numbers from a single pair of tumor-normal genotyping microarrays, BMC Bioinformatics, 2010. DOI: [10.1186/1471-2105-11-245](https://doi.org/10.1186%2F1471-2105-11-245). PMID: [20462408](https://europepmc.org/article/MED/20462408), PMCID: PMC2894037
 
-* Olshen AB, Bengtsson H, Neuvial P, Spellman PT, Olshen RA, Seshan VA. Parent-specific copy number in paired tumor-normal studies using circular binary segmentation, Bioinformatics, 2011. DOI: [10.1093/bioinformatics/btr329](https://doi.org/10.1093%2Fbioinformatics%2Fbtr329). PMID: [21666266](https://europepmc.org/article/MED/21666266). PMCID: [PMC3137217](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3137217/)
+* Olshen AB, Bengtsson H, Neuvial P, Spellman PT, Olshen RA, Seshan VA. Parent-specific copy number in paired tumor-normal studies using circular binary segmentation, Bioinformatics, 2011. DOI: [10.1093/bioinformatics/btr329](https://doi.org/10.1093%2Fbioinformatics%2Fbtr329). PMID: [21666266](https://europepmc.org/article/MED/21666266). PMCID: PMC3137217
+
 
 ## Installation
 
