@@ -1,5 +1,5 @@
 Package: PSCBS
-Version: 0.67.0-9006
+Version: 0.68.0
 Depends:
   R (>= 3.2.0)
 Imports:
