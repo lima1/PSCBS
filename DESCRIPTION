@@ -1,5 +1,5 @@
 Package: PSCBS
-Version: 0.67.0-9005
+Version: 0.67.0-9006
 Depends:
   R (>= 3.2.0)
 Imports:
@@ -10,7 +10,6 @@ Imports:
   matrixStats (>= 0.62.0),
   aroma.light (>= 2.4.0),
   DNAcopy (>= 1.42.0),
-  listenv (>= 0.8.0),
   future (>= 1.28.0),
   parallel,
   graphics,
