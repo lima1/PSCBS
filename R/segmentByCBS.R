@@ -327,7 +327,7 @@ setMethodS3("segmentByCBS", "default", function(y, chromosome=0L, x=NULL, index=
       verbose && printf(verbose, "Produced %d seeds from this stream for future usage\n", length(seeds))
     }
 
-    fitList <- listenv()
+    fitList <- list()
     for (kk in seq_len(nbrOfChromosomes)) {
       chromosomeKK <- chromosomes[kk]
       chrTag <- sprintf("Chr%02d", chromosomeKK)
@@ -352,7 +352,7 @@ setMethodS3("segmentByCBS", "default", function(y, chromosome=0L, x=NULL, index=
         verbose && print(verbose, knownSegmentsKK, level=-5)
       }
 
-      fitList[[chrTag]] %<-% {
+      fitList[[chrTag]] <- future({
         fit <- segmentByCBS(y=y,
                   chromosome=chrom, x=x,
                   w=w,
@@ -382,14 +382,14 @@ setMethodS3("segmentByCBS", "default", function(y, chromosome=0L, x=NULL, index=
         verbose && print(verbose, tail(as.data.frame(fit)), level=-10)
 
         fit
-      } %seed% TRUE %label% sprintf("segmentByCBS-%s", chrTag)  ## fitList[[chrTag]] <- ...
+      }, seed = TRUE, label = sprintf("segmentByCBS-%s", chrTag))
 
       rm(list=fields) # Not needed anymore
       verbose && exit(verbose)
     } # for (kk ...)
 
     verbose && enter(verbose, "Merging (independently) segmented chromosome", level=-50)
-    fitList <- as.list(fitList)
+    fitList <- value(fitList)
     ## former Reduce() w/ append(..., addSplit = TRUE)
     fit <- do.call(c, args = c(fitList, addSplit = TRUE))
     # Not needed anymore
@@ -482,7 +482,7 @@ setMethodS3("segmentByCBS", "default", function(y, chromosome=0L, x=NULL, index=
       verbose && printf(verbose, "Produced %d seeds from this stream for future usage\n", length(seeds))
     }
 
-    fitList <- listenv()
+    fitList <- list()
     for (jj in seq_len(nbrOfSegments)) {
       seg <- knownSegments[jj,]
       chromosomeJJ <- seg$chromosome
@@ -526,7 +526,7 @@ setMethodS3("segmentByCBS", "default", function(y, chromosome=0L, x=NULL, index=
 
       seedJJ <- seeds[[jj]]
 
-      fitList[[segTag]] %<-% {
+      fitList[[segTag]] <- future({
         fit <- segmentByCBS(y=y,
                   chromosome=chrom, x=x,
                   w=w,
@@ -558,11 +558,17 @@ setMethodS3("segmentByCBS", "default", function(y, chromosome=0L, x=NULL, index=
 
         # Sanity check
         if (R_SANITY_CHECK) {
-          .stop_if_not(TRUE && nbrOfSegments(fit, splitters=TRUE) > 0)
+          ## NOTE: Need to use PSCBS::nbrOfSegments() for this to work
+          ## when 'PSCBS' is not attached. The reason is that the future
+          ## picks up the local integer variable 'nbrOfSegments' instead
+          ## of the nbrOfSegments() function of 'PSCBS' as a global
+          ## variable.
+          ## https://github.com/HenrikBengtsson/PSCBS/issues/67
+          .stop_if_not(TRUE && PSCBS::nbrOfSegments(fit, splitters=TRUE) > 0)
         } # if (R_SANITY_CHECK)
 
         fit
-      } %seed% TRUE %label% sprintf("segmentByCBS-%s", segTag)  ## fitList[[segTag]] <- ...
+      }, seed = TRUE, label = sprintf("segmentByCBS-%s", segTag))
 
       rm(list=fields) # Not needed anymore
 
@@ -572,7 +578,7 @@ setMethodS3("segmentByCBS", "default", function(y, chromosome=0L, x=NULL, index=
 
     verbose && enter(verbose, "Merging (independently) segmented known segments", level=-10)
     verbose && cat(verbose, "Number of segments: ", length(fitList), level=-10)
-    fitList <- as.list(fitList)
+    fitList <- value(fitList)
     verbose && str(verbose, fitList, level=-50)
     ## former Reduce() w/ append(..., addSplit = FALSE)
     fit <- do.call(c, args = c(fitList, addSplit = FALSE))

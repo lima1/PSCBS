@@ -53,8 +53,7 @@ importFrom("aroma.light",
 importFrom("DNAcopy",
            "segments.summary", "smooth.CNA", "CNA", "segment", "getbdry")
 
-importFrom("listenv", "listenv")
-importFrom("future", "%<-%", "%seed%", "%label%")
+importFrom("future", "future", "value")
 importFrom("parallel", "nextRNGStream")
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
