@@ -467,7 +467,7 @@ setMethodS3("segmentByCBS", "default", function(y, chromosome=0L, x=NULL, index=
       splitter <- extractSegment(splitter, 2)
       # Sanity check
       if (R_SANITY_CHECK) {
-        .stop_if_not(nbrOfSegments(splitter, splitters=TRUE) == 1)
+        .stop_if_not(nrow(getSegments(splitter, splitters=TRUE)) == 1)
       } # if (R_SANITY_CHECK)
     })
 
@@ -558,7 +558,7 @@ setMethodS3("segmentByCBS", "default", function(y, chromosome=0L, x=NULL, index=
 
         # Sanity check
         if (R_SANITY_CHECK) {
-          .stop_if_not(TRUE && nbrOfSegments(fit, splitters=TRUE) > 0)
+          .stop_if_not(TRUE && nrow(getSegments(fit, splitters=TRUE) > 0))
         } # if (R_SANITY_CHECK)
 
         fit
