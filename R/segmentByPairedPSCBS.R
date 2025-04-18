@@ -487,7 +487,7 @@ setMethodS3("segmentByPairedPSCBS", "default", function(CT, thetaT=NULL, thetaN=
       verbose && printf(verbose, "Produced %d seeds from this stream for future usage\n", length(seeds))
     }
 
-    fitList <- listenv()
+    fitList <- list()
     for (kk in seq_len(nbrOfChromosomes)) {
       chromosomeKK <- chromosomes[kk]
       chrTag <- sprintf("Chr%02d", chromosomeKK)
@@ -508,7 +508,7 @@ setMethodS3("segmentByPairedPSCBS", "default", function(CT, thetaT=NULL, thetaN=
         verbose && print(verbose, knownSegmentsKK)
       }
 
-      fitList[[chrTag]] %<-% {
+      fitList[[chrTag]] <- future({
         fit <- segmentByPairedPSCBS(CT=CT, thetaT=thetaT, thetaN=thetaN,
                   betaT=betaTN, betaN=betaN, w=w, muN=muN, rho=rho,
                   chromosome=chromosome, x=x,
@@ -536,14 +536,14 @@ setMethodS3("segmentByPairedPSCBS", "default", function(CT, thetaT=NULL, thetaN=
         verbose && print(verbose, tail(as.data.frame(fit)))
 
         fit
-      } %seed% TRUE %label% sprintf("segmentByPairedPSCBS-%s", chrTag)  ## fitList[[chrTag]] <- ...
+      }, seed = TRUE, label = sprintf("segmentByPairedPSCBS-%s", chrTag))
 
       rm(list=fields) # Not needed anymore
       verbose && exit(verbose)
     } # for (kk ...)
 
     verbose && enter(verbose, "Merging (independently) segmented chromosome")
-    fitList <- as.list(fitList)
+    fitList <- value(fitList)
     ## former Reduce() w/ append(..., addSplit = TRUE)
     fit <- do.call(c, args = c(fitList, addSplit = TRUE))
     fitList <- NULL # Not needed anymore

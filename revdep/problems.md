@@ -1,100 +1,116 @@
-# aroma.core
+# jointseg
 
 <details>
 
-* Version: 3.2.2
-* GitHub: https://github.com/HenrikBengtsson/aroma.core
-* Source code: https://github.com/cran/aroma.core
-* Date/Publication: 2021-01-05 05:10:12 UTC
-* Number of recursive dependencies: 48
+* Version: 1.0.2
+* GitHub: https://github.com/mpierrejean/jointseg
+* Source code: https://github.com/cran/jointseg
+* Date/Publication: 2019-01-11 12:30:03 UTC
+* Number of recursive dependencies: 58
 
-Run `revdep_details(, "aroma.core")` for more info
+Run `revdepcheck::revdep_details(, "jointseg")` for more info
 
 </details>
 
 ## In both
 
-*   checking package dependencies ... NOTE
+*   checking re-building of vignette outputs ... ERROR
     ```
-    Packages suggested but not available for checking:
-      'sfit', 'expectile', 'HaarSeg', 'mpcbs'
-    ```
-
-# EstMix
-
-<details>
-
-* Version: 1.0.1
-* GitHub: NA
-* Source code: https://github.com/cran/EstMix
-* Date/Publication: 2018-09-13 04:20:02 UTC
-* Number of recursive dependencies: 16
-
-Run `revdep_details(, "EstMix")` for more info
-
-</details>
-
-## In both
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  5.5Mb
-      sub-directories of 1Mb or more:
-        extdata   1.3Mb
-        libs      3.9Mb
+    Error(s) in re-building vignettes:
+    --- re-building ‘PSSeg.Rmd’ using rmarkdown
+    Warning in png(..., res = dpi, units = "in") :
+      unable to open connection to X11 display ''
+    Warning in jpeg(..., res = dpi, units = "in") :
+      unable to open connection to X11 display ''
+    Warning: The device 'png' is not operational; falling back to 'svg'.
+    Warning: The device 'png' is not operational; falling back to 'svg'.
+    Warning: The device 'png' is not operational; falling back to 'svg'.
+    Warning: The device 'png' is not operational; falling back to 'svg'.
+    ...
+    
+    Error: processing vignette 'dataGeneration.Rmd' failed with diagnostics:
+    unable to start device PNG
+    --- failed re-building ‘dataGeneration.Rmd’
+    
+    SUMMARY: processing the following files failed:
+      ‘PSSeg.Rmd’ ‘dataGeneration.Rmd’
+    
+    Error: Vignette re-building failed.
+    Execution halted
     ```
 
 # PureCN
 
 <details>
 
-* Version: 1.22.2
+* Version: 2.13.3
 * GitHub: https://github.com/lima1/PureCN
 * Source code: https://github.com/cran/PureCN
-* Date/Publication: 2021-07-04
-* Number of recursive dependencies: 153
+* Date/Publication: 2025-03-30
+* Number of recursive dependencies: 147
 
-Run `revdep_details(, "PureCN")` for more info
+Run `revdepcheck::revdep_details(, "PureCN")` for more info
 
 </details>
 
-## In both
+## Newly fixed
 
-*   checking re-building of vignette outputs ... WARNING
+*   checking examples ... ERROR
     ```
-    Error(s) in re-building vignettes:
-    --- re-building ‘Quick.Rmd’ using rmarkdown
-    Loading required package: DNAcopy
-    Loading required package: VariantAnnotation
-    Loading required package: BiocGenerics
-    Loading required package: parallel
+    Running examples in ‘PureCN-Ex.R’ failed
+    The error most likely occurred in:
     
-    Attaching package: 'BiocGenerics'
-    
-    The following objects are masked from 'package:parallel':
+    > ### Name: segmentationPSCBS
+    > ### Title: PSCBS segmentation
+    > ### Aliases: segmentationPSCBS
+    > 
+    > ### ** Examples
+    > 
+    > 
     ...
-    l.189 \RequirePackage
-                         {parnotes}^^M
-    !  ==> Fatal error occurred, no output PDF file produced!
-    --- failed re-building ‘PureCN.Rnw’
-    
-    SUMMARY: processing the following file failed:
-      ‘PureCN.Rnw’
-    
-    Error: Vignette re-building failed.
+    INFO [2025-04-18 11:02:53] Excluding 0 novel or poor quality variants from segmentation.
+    INFO [2025-04-18 11:02:53] Sample sex: ?
+    INFO [2025-04-18 11:02:53] Segmenting data...
+    INFO [2025-04-18 11:02:53] MAPD of 121 allelic fractions: 0.15 (0.15 adjusted).
+    INFO [2025-04-18 11:02:53] Using unweighted PSCBS.
+    INFO [2025-04-18 11:02:53] Setting undo.SD parameter to 0.750000.
+    Error in nbrOfSegments(fit, splitters = TRUE) : 
+      could not find function "nbrOfSegments"
+    Calls: runAbsoluteCN ... eval -> eval -> value -> value.Future -> signalConditions
     Execution halted
     ```
 
-*   checking package dependencies ... NOTE
+*   checking tests ...
     ```
-    Package which this enhances but not available for checking: ‘genomicsdb’
+      Running ‘testthat.R’
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 50 lines of output:
+      FATAL [2025-04-18 11:07:33] max.betafit.rho not within expected range or format. 
+      
+      FATAL [2025-04-18 11:07:33]  
+      
+      FATAL [2025-04-18 11:07:33] This is most likely a user error due to invalid input data or 
+      
+    ...
+       16.       └─base::eval(expr, p)
+       17.         └─base::eval(...)
+       18.           └─base::eval(...)
+       19.             ├─future::value(future)
+       20.             └─future:::value.Future(future)
+       21.               └─future:::signalConditions(...)
+      
+      [ FAIL 1 | WARN 13 | SKIP 2 | PASS 398 ]
+      Error: Test failures
+      Execution halted
     ```
 
-*   checking installed package size ... NOTE
+## In both
+
+*   checking for non-standard things in the check directory ... NOTE
     ```
-      installed size is  9.4Mb
-      sub-directories of 1Mb or more:
-        doc       3.5Mb
-        extdata   4.1Mb
+    Found the following files/directories:
+      ‘Sample1_PureCN.csv’ ‘Sample1_PureCN.rds’ ‘Sample1_PureCN.vcf’
+      ‘gc_file.txt’ ‘mapping_bias.rds’
     ```
 
