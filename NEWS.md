@@ -7,8 +7,8 @@
 ## Bug Fixes
 
  * `segmentByCBS()` had an internal bug which triggered an error on
-  `could not find function "nbrOfSegments"`, which was revealed thanks
-  to the release of **future** 1.40.0.
+  `could not find function "nbrOfSegments"`, which began with
+  **future** 1.40.0.
  
 
 # Version 0.67.0 [2024-02-16]

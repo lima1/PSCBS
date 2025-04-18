@@ -558,7 +558,13 @@ setMethodS3("segmentByCBS", "default", function(y, chromosome=0L, x=NULL, index=
 
         # Sanity check
         if (R_SANITY_CHECK) {
-          .stop_if_not(TRUE && nrow(getSegments(fit, splitters=TRUE) > 0))
+          ## NOTE: Need to use PSCBS::nbrOfSegments() for this to work
+          ## when 'PSCBS' is not attached. The reason is that the future
+          ## picks up the local integer variable 'nbrOfSegments' instead
+          ## of the nbrOfSegments() function of 'PSCBS' as a global
+          ## variable.
+          ## https://github.com/HenrikBengtsson/PSCBS/issues/67
+          .stop_if_not(TRUE && PSCBS::nbrOfSegments(fit, splitters=TRUE) > 0)
         } # if (R_SANITY_CHECK)
 
         fit
